@@ -1,0 +1,3712 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eshan Tiwari — Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --display: 'Bricolage Grotesque', sans-serif;
+  --sans: 'Plus Jakarta Sans', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg: #f7f5f2;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-inset: #f0ede8;
+  --ink: #111110;
+  --ink-2: #3d3d3a;
+  --ink-3: #757570;
+  --ink-4: #b5b3ae;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.15);
+  --accent: #111110;
+  --accent-bg: #111110;
+  --accent-fg: #f7f5f2;
+  --pill-bg: rgba(0,0,0,0.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f0e;
+  --bg-elevated: #1a1a18;
+  --bg-card: #1e1e1c;
+  --bg-inset: #252523;
+  --ink: #f5f4f0;
+  --ink-2: #c8c6c0;
+  --ink-3: #878580;
+  --ink-4: #4a4844;
+  --border: rgba(255,255,255,0.07);
+  --border-strong: rgba(255,255,255,0.14);
+  --accent: #f5f4f0;
+  --accent-bg: #f5f4f0;
+  --accent-fg: #0f0f0e;
+  --pill-bg: rgba(255,255,255,0.07);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--transition), color var(--transition);
+  overflow-x: hidden;
+}
+
+/* ── SCROLL PROGRESS ── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--ink);
+  z-index: 200;
+  transition: width 0.1s linear;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5rem;
+  height: 60px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition), border-color var(--transition);
+}
+
+nav.scrolled {
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav-mark {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-center {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--bg-inset);
+  border-radius: 100px;
+  padding: 0.3rem;
+}
+
+.nav-center a {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+  text-decoration: none;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  transition: all 0.2s;
+}
+
+.nav-center a:hover,
+.nav-center a.active {
+  color: var(--ink);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elevated);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-md);
+}
+
+.icon-sun, .icon-moon { line-height: 1; }
+[data-theme="light"] .icon-moon { display: none; }
+[data-theme="dark"] .icon-sun { display: none; }
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 7rem 2.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  width: fit-content;
+}
+
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.1); }
+}
+
+.hero-statement {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  max-width: 950px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.hero-statement .muted {
+  color: var(--ink-4);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--ink-3);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent-bg);
+  color: var(--accent-fg);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.2s;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-card);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  text-decoration: none;
+  border: 1px solid var(--border-strong);
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.hero-name-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-title {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  text-transform: lowercase;
+}
+
+.hero-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  background: var(--pill-bg);
+  color: var(--ink-3);
+  border: 1px solid var(--border);
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 6rem 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-full {
+  padding: 6rem 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3.5rem;
+}
+
+.eyebrow-line {
+  width: 24px;
+  height: 1px;
+  background: var(--ink-4);
+}
+
+.eyebrow-text {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+  text-transform: uppercase;
+}
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 6rem;
+}
+
+.stat-cell {
+  background: var(--bg-card);
+  padding: 2rem 2.5rem;
+  transition: background var(--transition);
+}
+
+.stat-num {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 2.5rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  text-transform: lowercase;
+}
+
+/* ── ABOUT ── */
+.about-layout {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-headline {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.75rem;
+}
+
+.about-body {
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.about-body p + p { margin-top: 1rem; }
+
+.about-body em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.signal-list {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.signal-item {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.signal-item:last-child { border-bottom: none; }
+.signal-item:hover { background: var(--bg-inset); }
+
+.signal-num {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--ink-4);
+  padding-top: 0.2rem;
+  min-width: 1.5rem;
+}
+
+.signal-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* ── PROJECTS ── */
+.project-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+  cursor: default;
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+}
+
+.project-card-header {
+  padding: 2rem 2.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-index {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+  text-transform: uppercase;
+}
+
+.project-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.project-type-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.type-pill {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  color: var(--ink-3);
+  border: 1px solid var(--border);
+}
+
+.project-arrow {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-3);
+  font-size: 1rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.project-card:hover .project-arrow {
+  background: var(--accent-bg);
+  color: var(--accent-fg);
+  border-color: var(--accent-bg);
+  transform: rotate(45deg);
+}
+
+.project-card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.project-block {
+  padding: 2rem 2.5rem;
+}
+
+.project-block + .project-block {
+  border-left: 1px solid var(--border);
+}
+
+.block-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 0.75rem;
+}
+
+.block-text {
+  font-size: 0.925rem;
+  color: var(--ink-2);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.project-card-footer {
+  padding: 1.5rem 2.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 2.5rem;
+  background: var(--bg-inset);
+}
+
+.impact-item {}
+.impact-val {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.impact-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-3);
+  text-transform: lowercase;
+}
+
+/* ── HOW I THINK ── */
+.think-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.think-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-sm);
+}
+
+.think-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.think-icon {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.think-num {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--ink-4);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.think-head {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.think-body {
+  font-size: 0.875rem;
+  color: var(--ink-3);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ── MARQUEE ── */
+.marquee-section {
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 4rem;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-track:hover { animation-play-state: paused; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.marquee-item::after {
+  content: '·';
+  color: var(--ink-4);
+}
+
+/* ── TEARDOWN ── */
+.teardown-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.teardown-header {
+  padding: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
+}
+
+.teardown-product-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #1a73e8;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  margin-bottom: 0.9rem;
+  width: fit-content;
+}
+
+.teardown-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.teardown-subtitle {
+  font-size: 0.925rem;
+  color: var(--ink-3);
+  line-height: 1.65;
+  max-width: 600px;
+  font-weight: 300;
+}
+
+.teardown-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.teardown-meta span {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.teardown-thesis {
+  padding: 2rem 2.5rem;
+  background: var(--bg-inset);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background-color: var(--border);
+}
+
+.thesis-block {
+  background: var(--bg-inset);
+  padding: 1.5rem 2rem;
+}
+
+.thesis-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 0.5rem;
+}
+
+.thesis-text {
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.thesis-text strong { font-weight: 600; color: var(--ink); }
+
+.teardown-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+
+.td-block {
+  background: var(--bg-card);
+  padding: 2rem 2.5rem;
+}
+
+.td-block-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.td-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.td-dot.green  { background: #22c55e; }
+.td-dot.red    { background: #ef4444; }
+.td-dot.amber  { background: #f59e0b; }
+.td-dot.blue   { background: #3b82f6; }
+
+.td-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.td-item {}
+
+.td-item-head {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  color: var(--ink);
+}
+
+.td-item-body {
+  font-size: 0.825rem;
+  color: var(--ink-3);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.teardown-ship {
+  padding: 2rem 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.ship-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.ship-item {
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  transition: all 0.2s;
+}
+
+.ship-item:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.ship-num {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+  margin-bottom: 0.5rem;
+}
+
+.ship-head {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+}
+
+.ship-body {
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+.teardown-timeline {
+  padding: 2rem 2.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-inset);
+}
+
+.timeline-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 1.25rem;
+}
+
+.timeline-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.timeline-track::-webkit-scrollbar { display: none; }
+
+.timeline-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 120px;
+  position: relative;
+}
+
+.timeline-node::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  right: -50%;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+.timeline-node:last-child::before { display: none; }
+
+.timeline-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--ink-4);
+  z-index: 1;
+  flex-shrink: 0;
+  margin-bottom: 0.6rem;
+}
+
+.timeline-node.highlight .timeline-dot {
+  background: #1a73e8;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+}
+
+.timeline-text {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+  text-align: center;
+  line-height: 1.4;
+  padding: 0 0.5rem;
+}
+
+.timeline-node.highlight .timeline-text { color: var(--ink); font-weight: 500; }
+
+/* ── PROJECT LIVE LINK ── */
+.project-live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  text-decoration: none;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.85rem;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+.project-live-link:hover {
+  color: var(--ink);
+  border-color: var(--border-strong);
+  transform: translateX(2px);
+}
+.project-live-link-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+/* ── PRODUCT PREVIEW ── */
+.product-preview {
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-top: 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.product-preview-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 0.75rem;
+}
+.product-feature-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.product-feature-row:last-child { border-bottom: none; }
+.feature-icon { color: var(--ink-4); font-size: 0.7rem; padding-top: 0.05rem; }
+.feature-label { font-size: 0.78rem; color: var(--ink-2); line-height: 1.4; }
+
+/* ── CONTACT ── */
+.contact-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4rem;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: end;
+}
+
+.contact-headline {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+
+.contact-sub {
+  font-size: 0.95rem;
+  color: var(--ink-3);
+  max-width: 400px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  transition: all 0.2s;
+  min-width: 220px;
+}
+
+.contact-link:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+  transform: translateX(4px);
+}
+
+.contact-link-arrow { color: var(--ink-4); font-size: 0.8rem; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 1.5rem 2.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+
+footer span {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+/* ── METRICS PANELS ── */
+.metrics-panel {
+  border-top: 1px solid var(--border);
+  background: var(--bg-inset);
+  padding: 2rem 2.5rem;
+}
+
+.metrics-panel-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 1.5rem;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.metrics-grid-2 {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.kpi-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  transition: all 0.2s;
+}
+
+.kpi-card:hover { border-color: var(--border-strong); }
+
+.kpi-val {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.kpi-val.green { color: #22c55e; }
+.kpi-val.blue  { color: #3b82f6; }
+.kpi-val.amber { color: #f59e0b; }
+.kpi-val.purple { color: #a855f7; }
+
+.kpi-desc {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-4);
+  line-height: 1.4;
+  text-transform: lowercase;
+}
+
+.chart-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  position: relative;
+}
+
+.chart-title {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 1rem;
+}
+
+.chart-wrap canvas {
+  display: block;
+  max-height: 160px;
+  width: 100% !important;
+}
+
+.td-chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* ── HERO 2-COL ── */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 3rem;
+  align-items: end;
+}
+
+.hero-left { display: flex; flex-direction: column; }
+
+.hero-right {
+  position: relative;
+  padding-bottom: 3.5rem;
+  align-self: end;
+}
+
+.floating-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.float-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.float-card.visible { opacity: 1; transform: translateX(0); }
+.float-card:nth-child(2) { transition-delay: 0.15s; margin-left: 1.5rem; }
+.float-card:nth-child(3) { transition-delay: 0.3s; }
+
+.fc-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.fc-tag-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+
+.fc-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+
+.fc-body {
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+.fc-score-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.fc-score-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg-inset);
+  overflow: hidden;
+}
+
+.fc-score-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+.fc-citation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(59,130,246,0.12);
+  color: #3b82f6;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+}
+
+/* ── PRODUCT PREVIEW FRAME ── */
+.preview-frame {
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  background: #111;
+}
+
+.browser-bar {
+  background: #1e1e1e;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.browser-dots { display: flex; gap: 5px; }
+.b-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.b-dot.red    { background: #ff5f56; }
+.b-dot.amber  { background: #ffbd2e; }
+.b-dot.green  { background: #27c93f; }
+
+.browser-url {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.02em;
+}
+
+/* RECRUIT.ai mockup */
+.recruit-app {
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  min-height: 320px;
+  font-family: var(--sans);
+}
+
+.recruit-panel {
+  padding: 1.25rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.recruit-panel:last-child { border-right: none; }
+
+.rp-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.rp-icon { font-size: 0.9rem; }
+
+.jd-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  font-family: var(--sans);
+}
+
+.jd-example {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.5;
+}
+
+.upload-zone {
+  background: rgba(255,255,255,0.03);
+  border: 1.5px dashed rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.upload-icon { font-size: 1.2rem; margin-bottom: 0.4rem; color: rgba(255,255,255,0.3); }
+.upload-text { font-size: 0.7rem; color: rgba(255,255,255,0.4); font-weight: 500; }
+.upload-sub  { font-size: 0.62rem; color: rgba(255,255,255,0.2); margin-top: 0.2rem; }
+
+.candidate-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.candidate-item.active {
+  background: rgba(59,130,246,0.15);
+  border-color: rgba(59,130,246,0.3);
+}
+
+.c-rank {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  width: 18px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.c-rank.top { color: #22c55e; }
+
+.c-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.c-info { flex: 1; min-width: 0; }
+.c-name { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-role { font-size: 0.62rem; color: rgba(255,255,255,0.35); margin-top: 0.1rem; }
+
+.c-score-badge {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.c-score-badge.high   { background: rgba(34,197,94,0.2);  color: #22c55e; }
+.c-score-badge.mid    { background: rgba(245,158,11,0.2); color: #f59e0b; }
+.c-score-badge.low    { background: rgba(239,68,68,0.2);  color: #ef4444; }
+
+.insight-panel { padding: 1.25rem; }
+
+.insight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.insight-name { font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.9); }
+.insight-score { font-family: var(--mono); font-size: 1.3rem; font-weight: 800; color: #22c55e; }
+
+.insight-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.ibar-label { font-size: 0.65rem; color: rgba(255,255,255,0.4); width: 90px; flex-shrink: 0; }
+.ibar-track { flex: 1; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+.ibar-fill  { height: 100%; border-radius: 3px; }
+.ibar-val   { font-family: var(--mono); font-size: 0.62rem; color: rgba(255,255,255,0.4); width: 24px; text-align: right; }
+
+.insight-tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.85rem; }
+.insight-tag {
+  font-size: 0.62rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.5);
+}
+
+/* ARGUS.ai mockup */
+.argus-app {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 320px;
+  font-family: var(--sans);
+}
+
+.argus-sidebar {
+  padding: 1rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+
+.argus-logo {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.argus-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  margin-bottom: 0.15rem;
+}
+
+.argus-nav-item.active {
+  background: rgba(59,130,246,0.15);
+  color: rgba(255,255,255,0.85);
+}
+
+.argus-nav-icon { font-size: 0.85rem; }
+
+.argus-chat {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  gap: 0.85rem;
+  overflow: hidden;
+}
+
+.chat-msg {
+  max-width: 85%;
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.chat-msg.user {
+  align-self: flex-end;
+  background: rgba(59,130,246,0.2);
+  border: 1px solid rgba(59,130,246,0.25);
+  color: rgba(255,255,255,0.85);
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px 12px 2px 12px;
+}
+
+.chat-msg.bot {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.8);
+  padding: 0.75rem 1rem;
+  border-radius: 2px 12px 12px 12px;
+}
+
+.chat-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+
+.chat-source.blue   { background: rgba(59,130,246,0.15);  color: #60a5fa; }
+.chat-source.green  { background: rgba(34,197,94,0.12);   color: #4ade80; }
+.chat-source.purple { background: rgba(168,85,247,0.12);  color: #c084fc; }
+
+.chat-input-bar {
+  margin-top: auto;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ── PIPELINE FLOW ── */
+.pipeline-section {
+  padding: 1.5rem 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.pipeline-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 1.25rem;
+}
+
+.pipeline-flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+}
+
+.pipeline-flow::-webkit-scrollbar { display: none; }
+
+.pipe-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.pipe-icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.pipe-name {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.pipe-arrow {
+  color: var(--ink-4);
+  font-size: 1rem;
+  flex-shrink: 0;
+  padding: 0 0.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.pipe-step.highlight .pipe-icon-wrap {
+  background: var(--accent-bg);
+  border-color: var(--accent-bg);
+}
+
+.pipe-step.highlight .pipe-icon-wrap span { filter: invert(1); }
+.pipe-step.highlight .pipe-name { color: var(--ink); font-weight: 500; }
+
+/* ── TEARDOWN CARD GRID ── */
+.teardown-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.td-summary-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.td-summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  transition: opacity 0.2s;
+}
+
+.td-summary-card.nlm::before   { background: #3b82f6; }
+.td-summary-card.swift::before { background: linear-gradient(90deg,#7c3aed,#4f46e5); }
+.td-summary-card.cred::before  { background: #f5f4f0; }
+
+.td-summary-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.td-summary-card.active {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.td-sc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  margin-bottom: 0.85rem;
+  color: #fff;
+  width: fit-content;
+}
+
+.td-sc-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.td-sc-sub {
+  font-size: 0.8rem;
+  color: var(--ink-3);
+  line-height: 1.55;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.td-sc-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.td-sc-stat {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  color: var(--ink-3);
+  border: 1px solid var(--border);
+}
+
+.td-sc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.td-sc-cta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+
+.td-summary-card:hover .td-sc-cta,
+.td-summary-card.active .td-sc-cta { color: var(--ink); }
+
+.td-sc-arrow {
+  display: inline-block;
+  transition: transform 0.3s;
+  font-size: 0.8rem;
+}
+
+.td-summary-card.active .td-sc-arrow { transform: rotate(90deg); }
+
+.td-sc-lens {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+.td-panel {
+  display: none;
+}
+.td-panel.active {
+  display: block;
+  animation: tdFadeIn 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+@keyframes tdFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-center { display: none; }
+  .hero { padding: 6rem 1.5rem 3rem; }
+  .section, .section-full { padding: 4rem 1.5rem; }
+  .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  .project-card-body { grid-template-columns: 1fr; }
+  .project-block + .project-block { border-left: none; border-top: 1px solid var(--border); }
+  .think-grid { grid-template-columns: 1fr; }
+  .teardown-header { grid-template-columns: 1fr; }
+  .teardown-meta { align-items: flex-start; }
+  .teardown-thesis { grid-template-columns: 1fr; }
+  .teardown-body { grid-template-columns: 1fr; }
+  .ship-grid { grid-template-columns: 1fr 1fr; }
+  .metrics-grid, .metrics-grid-2 { grid-template-columns: 1fr; }
+  .td-chart-grid { grid-template-columns: 1fr; }
+  .teardown-cards-grid { grid-template-columns: 1fr; }
+  .contact-card { grid-template-columns: 1fr; padding: 2.5rem; }
+  .stats-row { grid-template-columns: 1fr; }
+  .hero-statement { font-size: clamp(2.4rem, 9vw, 3.5rem); }
+}
+
+@media (max-width: 600px) {
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .hero-divider { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  footer { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+  .project-card-footer { flex-wrap: wrap; gap: 1.5rem; }
+  .recruit-app { grid-template-columns: 1fr; }
+  .argus-app { grid-template-columns: 1fr; }
+  .argus-sidebar { display: none; }
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .recruit-app { grid-template-columns: 1fr 1fr; }
+  .recruit-app .recruit-panel:last-child { display: none; }
+  .argus-app { grid-template-columns: 1fr; }
+  .argus-sidebar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-mark" href="#">ET</a>
+  <div class="nav-center">
+    <a href="#work" class="nav-link">work</a>
+    <a href="#teardowns" class="nav-link">teardowns</a>
+    <a href="#approach" class="nav-link">approach</a>
+    <a href="#contact" class="nav-link">contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+      <span class="icon-sun">☀</span>
+      <span class="icon-moon">☾</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="border-top:none;">
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge reveal">
+        <span class="hero-badge-dot"></span>
+        Available for new opportunities
+      </div>
+      <h1 class="hero-statement reveal reveal-delay-1">
+        I dig into products,<br>
+        find what's broken,<br>
+        <span class="muted">and build AI to fix it.</span>
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Product Manager with an Industrial Engineering background. I care more about the problem than the solution — the solution follows.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#work" class="btn-primary">See my work ↓</a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
+      </div>
+      <div class="hero-divider reveal reveal-delay-4">
+        <div class="hero-name-block">
+          <span class="hero-name">Eshan Tiwari</span>
+          <span class="hero-title">product manager · ai builder</span>
+        </div>
+        <div class="hero-pills">
+          <span class="pill">0→1 products</span>
+          <span class="pill">AI / RAG</span>
+          <span class="pill">industrial eng.</span>
+          <span class="pill">India</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="floating-cards" id="floatingCards">
+        <!-- Card 1: RECRUIT.ai candidate result -->
+        <div class="float-card">
+          <div class="fc-tag">
+            <span class="fc-tag-dot" style="background:#22c55e"></span>
+            RECRUIT.ai · candidate ranked
+          </div>
+          <div class="fc-title">Priya Sharma · 94/100</div>
+          <div class="fc-body">Senior PM, 6 yrs. Strong AI product background. Matches 9/10 JD criteria.</div>
+          <div class="fc-score-row">
+            <div class="fc-score-bar"><div class="fc-score-fill" style="width:94%;background:#22c55e"></div></div>
+          </div>
+        </div>
+        <!-- Card 2: ARGUS.ai response -->
+        <div class="float-card">
+          <div class="fc-tag">
+            <span class="fc-tag-dot" style="background:#3b82f6"></span>
+            ARGUS.ai · query resolved
+          </div>
+          <div class="fc-title">"What's our parental leave policy?"</div>
+          <div class="fc-body">18 weeks fully paid for primary caregivers, 6 weeks for secondary.</div>
+          <div><span class="fc-citation">📄 HR Policy v2.4, p.12</span></div>
+        </div>
+        <!-- Card 3: Teardown insight -->
+        <div class="float-card">
+          <div class="fc-tag">
+            <span class="fc-tag-dot" style="background:#f59e0b"></span>
+            Teardown · NotebookLM
+          </div>
+          <div class="fc-title">Trust Architecture: 9/10</div>
+          <div class="fc-body">Grounding is a structural property — the moat competitors can't casually replicate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Product Strategy</span>
+    <span class="marquee-item">AI Product Development</span>
+    <span class="marquee-item">RAG Systems</span>
+    <span class="marquee-item">User Research</span>
+    <span class="marquee-item">0 to 1 Builds</span>
+    <span class="marquee-item">Data-Driven Decisions</span>
+    <span class="marquee-item">Industrial Engineering</span>
+    <span class="marquee-item">HR Tech</span>
+    <span class="marquee-item">Enterprise AI</span>
+    <span class="marquee-item">Product Strategy</span>
+    <span class="marquee-item">AI Product Development</span>
+    <span class="marquee-item">RAG Systems</span>
+    <span class="marquee-item">User Research</span>
+    <span class="marquee-item">0 to 1 Builds</span>
+    <span class="marquee-item">Data-Driven Decisions</span>
+    <span class="marquee-item">Industrial Engineering</span>
+    <span class="marquee-item">HR Tech</span>
+    <span class="marquee-item">Enterprise AI</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-full" id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">about</span>
+    </div>
+
+    <div class="stats-row reveal">
+      <div class="stat-cell">
+        <div class="stat-num">2</div>
+        <div class="stat-label">AI products shipped from 0</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">problem-first approach</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">IE</div>
+        <div class="stat-label">industrial engineering background</div>
+      </div>
+    </div>
+
+    <div class="about-layout">
+      <div>
+        <h2 class="about-headline reveal">Not just shipping features — solving the right problems.</h2>
+        <div class="about-body reveal reveal-delay-1">
+          <p>Most PM portfolios look the same because most PMs describe <em>what</em> they built, not <em>why</em> it needed to exist. I'm more interested in the problem side of the equation — the messy operational reality, the workarounds people are already using, the process that breaks quietly every day.</p>
+          <p>My background in Industrial Engineering gave me a habit of looking at systems before solutions. Before I write a spec, I want to understand the flow it lives inside. Before I propose AI, I want to know if the problem is actually a data problem, a process problem, or a people problem.</p>
+          <p>The products I'm most proud of started with someone saying <em>"this is just how it works"</em> — and ended with a working prototype that proved it didn't have to.</p>
+        </div>
+      </div>
+      <div class="signal-list reveal reveal-delay-2">
+        <div class="signal-item">
+          <span class="signal-num">01</span>
+          <span class="signal-text">Industrial Engineering background — I think in systems, not just screens.</span>
+        </div>
+        <div class="signal-item">
+          <span class="signal-num">02</span>
+          <span class="signal-text">Built two AI products from scratch. Both started with a real operational pain.</span>
+        </div>
+        <div class="signal-item">
+          <span class="signal-num">03</span>
+          <span class="signal-text">Comfortable in the gap between engineering and business — I translate both ways.</span>
+        </div>
+        <div class="signal-item">
+          <span class="signal-num">04</span>
+          <span class="signal-text">Data-driven where it matters. Gut-driven where the data doesn't exist yet.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORK -->
+<div class="section-full" id="work">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">selected work</span>
+    </div>
+    <div class="project-list">
+
+      <!-- RECRUIT.ai -->
+      <div class="project-card reveal">
+        <div class="project-card-header">
+          <div class="project-meta">
+            <span class="project-index">01 / 02</span>
+            <div class="project-name">RECRUIT.ai</div>
+            <div class="project-type-pills">
+              <span class="type-pill">AI</span>
+              <span class="type-pill">HR Tech</span>
+              <span class="type-pill">0→1</span>
+            </div>
+            <a class="project-live-link" href="https://recruit16ai.lovable.app/" target="_blank" rel="noopener">
+              <span class="project-live-link-dot"></span>
+              Live product — recruit16ai.lovable.app ↗
+            </a>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <!-- PRODUCT MOCKUP -->
+        <div class="preview-frame">
+          <div class="browser-bar">
+            <div class="browser-dots"><span class="b-dot red"></span><span class="b-dot amber"></span><span class="b-dot green"></span></div>
+            <div class="browser-url">recruit16ai.lovable.app</div>
+          </div>
+          <div class="recruit-app">
+            <!-- Left: JD + Upload -->
+            <div class="recruit-panel" style="background:#161616;">
+              <div class="rp-header"><span class="rp-icon">📋</span> Job Description</div>
+              <div class="jd-input">
+                <div style="color:rgba(255,255,255,0.7);font-weight:500;margin-bottom:0.4rem;font-size:0.72rem;">Senior Product Manager – AI</div>
+                <div class="jd-example">5+ years PM experience. Strong background in AI/ML products. Experience with 0-to-1 builds, cross-functional stakeholder management, data-driven decision making...</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:0.45rem 0.75rem;text-align:center;font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:0.9rem;cursor:pointer;">📋 Paste from Clipboard</div>
+              <div class="rp-header" style="margin-top:0.25rem;"><span class="rp-icon">⬆</span> Upload Resumes</div>
+              <div class="upload-zone">
+                <div class="upload-icon">📄</div>
+                <div class="upload-text">Drop files or click to upload</div>
+                <div class="upload-sub">PDF, DOCX, TXT · Max 10MB each</div>
+              </div>
+              <div style="background:#22c55e;color:#000;border-radius:6px;padding:0.5rem;text-align:center;font-size:0.72rem;font-weight:700;margin-top:0.75rem;cursor:pointer;">▶ Run AI Analysis</div>
+            </div>
+
+            <!-- Middle: Candidate Ranking -->
+            <div class="recruit-panel" style="background:#111;">
+              <div class="rp-header"><span class="rp-icon">🏆</span> Candidate Ranking</div>
+              <div class="candidate-item active">
+                <span class="c-rank top">#1</span>
+                <div class="c-avatar" style="background:#3b82f6;">PS</div>
+                <div class="c-info"><div class="c-name">Priya Sharma</div><div class="c-role">Sr. PM · 6 yrs</div></div>
+                <span class="c-score-badge high">94</span>
+              </div>
+              <div class="candidate-item">
+                <span class="c-rank top">#2</span>
+                <div class="c-avatar" style="background:#8b5cf6;">AK</div>
+                <div class="c-info"><div class="c-name">Arjun Kapoor</div><div class="c-role">PM · 4 yrs</div></div>
+                <span class="c-score-badge high">88</span>
+              </div>
+              <div class="candidate-item">
+                <span class="c-rank">#3</span>
+                <div class="c-avatar" style="background:#f59e0b;">NM</div>
+                <div class="c-info"><div class="c-name">Neha Mehta</div><div class="c-role">APM · 2 yrs</div></div>
+                <span class="c-score-badge mid">71</span>
+              </div>
+              <div class="candidate-item">
+                <span class="c-rank">#4</span>
+                <div class="c-avatar" style="background:#64748b;">RV</div>
+                <div class="c-info"><div class="c-name">Rahul Verma</div><div class="c-role">PM · 3 yrs</div></div>
+                <span class="c-score-badge mid">63</span>
+              </div>
+              <div class="candidate-item">
+                <span class="c-rank">#5</span>
+                <div class="c-avatar" style="background:#ef4444;">SK</div>
+                <div class="c-info"><div class="c-name">Sunita Kumar</div><div class="c-role">PM · 1 yr</div></div>
+                <span class="c-score-badge low">41</span>
+              </div>
+            </div>
+
+            <!-- Right: Candidate Insights -->
+            <div class="insight-panel" style="background:#0e0e0e;">
+              <div class="rp-header"><span class="rp-icon">📊</span> Candidate Insights</div>
+              <div class="insight-header">
+                <div><div class="insight-name">Priya Sharma</div><div style="font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:0.2rem;">Sr. Product Manager</div></div>
+                <div class="insight-score">94</div>
+              </div>
+              <div class="insight-bar-row"><div class="ibar-label">AI/ML Product</div><div class="ibar-track"><div class="ibar-fill" style="width:96%;background:#22c55e;"></div></div><div class="ibar-val">96</div></div>
+              <div class="insight-bar-row"><div class="ibar-label">0-to-1 Builds</div><div class="ibar-track"><div class="ibar-fill" style="width:90%;background:#3b82f6;"></div></div><div class="ibar-val">90</div></div>
+              <div class="insight-bar-row"><div class="ibar-label">Data Analysis</div><div class="ibar-track"><div class="ibar-fill" style="width:88%;background:#8b5cf6;"></div></div><div class="ibar-val">88</div></div>
+              <div class="insight-bar-row"><div class="ibar-label">Stakeholders</div><div class="ibar-track"><div class="ibar-fill" style="width:82%;background:#f59e0b;"></div></div><div class="ibar-val">82</div></div>
+              <div class="insight-bar-row"><div class="ibar-label">Leadership</div><div class="ibar-track"><div class="ibar-fill" style="width:75%;background:#ef4444;"></div></div><div class="ibar-val">75</div></div>
+              <div class="insight-tag-row">
+                <span class="insight-tag">✓ Gemini 1.5 Pro</span>
+                <span class="insight-tag">✓ Shipped 3 AI tools</span>
+                <span class="insight-tag">✓ IIT Bombay</span>
+                <span class="insight-tag">✓ Figma proficient</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PIPELINE -->
+        <div class="pipeline-section">
+          <div class="pipeline-label">how it works — AI screening pipeline</div>
+          <div class="pipeline-flow">
+            <div class="pipe-step"><div class="pipe-icon-wrap"><span>📋</span></div><div class="pipe-name">Job<br>Description</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="pipe-icon-wrap"><span>📄</span></div><div class="pipe-name">Resume<br>Upload</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step highlight"><div class="pipe-icon-wrap" style="background:#3b82f6;border-color:#3b82f6;"><span style="filter:none;">🤖</span></div><div class="pipe-name" style="color:var(--ink);font-weight:600;">AI<br>Analysis</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="pipe-icon-wrap"><span>📊</span></div><div class="pipe-name">Candidate<br>Scoring</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="pipe-icon-wrap"><span>🏆</span></div><div class="pipe-name">Ranked<br>Shortlist</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step highlight"><div class="pipe-icon-wrap" style="background:#22c55e;border-color:#22c55e;"><span style="filter:none;">✓</span></div><div class="pipe-name" style="color:var(--ink);font-weight:600;">Explainable<br>Insights</div></div>
+          </div>
+        </div>
+
+        <div class="project-card-body">
+          <div class="project-block">
+            <div class="block-label">the problem</div>
+            <p class="block-text">HR teams were drowning in applications. Screening was manual, inconsistent, and expensive — a single role could mean hundreds of CVs reviewed by a human before a single call was booked. Good candidates fell through. Bad hires still made it through.</p>
+            <div class="product-preview">
+              <div class="product-preview-title">how it works</div>
+              <div class="product-feature-row">
+                <span class="feature-icon">→</span>
+                <span class="feature-label">Paste or upload a job description to set the screening criteria</span>
+              </div>
+              <div class="product-feature-row">
+                <span class="feature-icon">→</span>
+                <span class="feature-label">Upload candidate resumes in bulk — PDF, DOCX, or TXT</span>
+              </div>
+              <div class="product-feature-row">
+                <span class="feature-icon">→</span>
+                <span class="feature-label">AI ranks all candidates against the role and surfaces a shortlist</span>
+              </div>
+              <div class="product-feature-row">
+                <span class="feature-icon">→</span>
+                <span class="feature-label">Each candidate gets detailed insights — recruiter can interrogate the reasoning</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-block">
+            <div class="block-label">what I built</div>
+            <p class="block-text">An end-to-end AI screening system that matches CVs to a job description and ranks candidates automatically. The core design decision: every shortlist includes per-candidate insights the recruiter can click into — not just a score to trust blindly. The ranking adapts to the specific role, not a generic rubric.</p>
+          </div>
+        </div>
+        <div class="metrics-panel">
+          <div class="metrics-panel-label">product metrics</div>
+          <div class="metrics-grid">
+            <div class="kpi-stack">
+              <div class="kpi-card">
+                <div class="kpi-val green">96%</div>
+                <div class="kpi-desc">reduction in screening time per role</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-val blue">500+</div>
+                <div class="kpi-desc">resumes processed per run</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-val amber">91%</div>
+                <div class="kpi-desc">recruiter agreement with AI shortlist</div>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <div class="chart-title">Screening time per role (hours)</div>
+              <canvas id="recruitTimeChart"></canvas>
+            </div>
+            <div class="chart-wrap">
+              <div class="chart-title">Candidate pipeline funnel</div>
+              <canvas id="recruitFunnelChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARGUS.ai -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-card-header">
+          <div class="project-meta">
+            <span class="project-index">02 / 02</span>
+            <div class="project-name">ARGUS.ai</div>
+            <div class="project-type-pills">
+              <span class="type-pill">AI</span>
+              <span class="type-pill">RAG</span>
+              <span class="type-pill">Enterprise</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </div>
+
+        <!-- PRODUCT MOCKUP -->
+        <div class="preview-frame">
+          <div class="browser-bar">
+            <div class="browser-dots"><span class="b-dot red"></span><span class="b-dot amber"></span><span class="b-dot green"></span></div>
+            <div class="browser-url">argus.internal · Company Knowledge Assistant</div>
+          </div>
+          <div class="argus-app">
+            <!-- Sidebar -->
+            <div class="argus-sidebar">
+              <div class="argus-logo">⬡ ARGUS.ai</div>
+              <div class="argus-nav-item active"><span class="argus-nav-icon">💬</span> Chat</div>
+              <div class="argus-nav-item"><span class="argus-nav-icon">📚</span> Docs</div>
+              <div class="argus-nav-item"><span class="argus-nav-icon">📋</span> Policies</div>
+              <div class="argus-nav-item"><span class="argus-nav-icon">🔧</span> Processes</div>
+              <div class="argus-nav-item"><span class="argus-nav-icon">💼</span> HR &amp; Benefits</div>
+              <div style="margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06);">
+                <div class="argus-nav-item"><span class="argus-nav-icon">⚙</span> Settings</div>
+              </div>
+            </div>
+            <!-- Chat -->
+            <div class="argus-chat">
+              <div class="chat-msg user">What's the process for requesting a budget increase for my team?</div>
+              <div class="chat-msg bot">
+                Budget increase requests go through a 3-step approval process:<br><br>
+                1. Submit a <strong style="color:rgba(255,255,255,0.9)">Budget Change Request form</strong> in Confluence<br>
+                2. Get line manager sign-off (up to ₹5L)<br>
+                3. Finance review within 5 business days for amounts above ₹5L
+                <div>
+                  <span class="chat-source blue">📄 Finance Policy v3.1</span>
+                  <span class="chat-source green">📋 Ops Handbook, p.24</span>
+                </div>
+              </div>
+              <div class="chat-msg user">Who approves engineering tool purchases?</div>
+              <div class="chat-msg bot">
+                Engineering tools under ₹10,000/year can be approved directly by your Engineering Manager. Above that, you'll need VP Engineering sign-off plus a security review from InfoSec.
+                <div>
+                  <span class="chat-source purple">🔧 Procurement SOP v2</span>
+                  <span class="chat-source blue">📄 InfoSec Policy</span>
+                </div>
+              </div>
+              <div class="chat-input-bar">Ask anything about company policies, processes, benefits... ✦</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PIPELINE -->
+        <div class="pipeline-section">
+          <div class="pipeline-label">RAG architecture — how ARGUS retrieves answers</div>
+          <div class="pipeline-flow">
+            <div class="pipe-step"><div class="pipe-icon-wrap"><span>💬</span></div><div class="pipe-name">Employee<br>Query</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step highlight"><div class="pipe-icon-wrap" style="background:#8b5cf6;border-color:#8b5cf6;"><span style="filter:none;">🔍</span></div><div class="pipe-name" style="color:var(--ink);font-weight:600;">Vector<br>Search</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="pipe-icon-wrap"><span>📚</span></div><div class="pipe-name">Doc<br>Retrieval</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step highlight"><div class="pipe-icon-wrap" style="background:#3b82f6;border-color:#3b82f6;"><span style="filter:none;">🤖</span></div><div class="pipe-name" style="color:var(--ink);font-weight:600;">LLM<br>Synthesis</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step"><div class="pipe-icon-wrap"><span>💡</span></div><div class="pipe-name">Grounded<br>Answer</div></div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step highlight"><div class="pipe-icon-wrap" style="background:#22c55e;border-color:#22c55e;"><span style="filter:none;">📌</span></div><div class="pipe-name" style="color:var(--ink);font-weight:600;">Cited<br>Sources</div></div>
+          </div>
+        </div>
+
+        <div class="project-card-body">
+          <div class="project-block">
+            <div class="block-label">the problem</div>
+            <p class="block-text">Employees waste hours searching for internal information — policies, processes, past decisions — scattered across wikis, Slack, and shared drives. Every time someone asks a question that's already been answered somewhere, the organization pays that cost twice.</p>
+          </div>
+          <div class="project-block">
+            <div class="block-label">what I built</div>
+            <p class="block-text">A company-wide knowledge chatbot using RAG. Instead of training on static data, ARGUS retrieves live answers from actual company documentation and surfaces them in natural language — with sources linked. Built to stay accurate as docs change, not drift over time.</p>
+          </div>
+        </div>
+        <div class="metrics-panel">
+          <div class="metrics-panel-label">product metrics</div>
+          <div class="metrics-grid-2">
+            <div class="kpi-stack">
+              <div class="kpi-card">
+                <div class="kpi-val green">87%</div>
+                <div class="kpi-desc">queries resolved without escalation</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-val blue">12s</div>
+                <div class="kpi-desc">avg response vs 8 min manual search</div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-val purple">40x</div>
+                <div class="kpi-desc">faster than searching docs manually</div>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <div class="chart-title">Weekly query volume (post-launch growth)</div>
+              <canvas id="argusGrowthChart"></canvas>
+            </div>
+            <div class="chart-wrap">
+              <div class="chart-title">Query category breakdown</div>
+              <canvas id="argusCategoryChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TEARDOWNS -->
+<div class="section-full" id="teardowns">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">product teardowns</span>
+    </div>
+    <p class="about-body reveal" style="max-width:620px; margin-bottom:2.5rem; font-weight:300;">
+      How I think about products I didn't build. I pick one product, go deep on the growth loop and architecture, then write what I'd ship next — and why.
+    </p>
+
+    <!-- ── 3 COMPACT SUMMARY CARDS ── -->
+    <div class="teardown-cards-grid reveal">
+
+      <div class="td-summary-card nlm active" id="ts-nlm" onclick="showTeardown('nlm')">
+        <div class="td-sc-badge" style="background:#1a73e8;">
+          <svg width="7" height="7" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="white" opacity="0.3"/><circle cx="5" cy="5" r="2" fill="white"/></svg>
+          NotebookLM · Google Labs
+        </div>
+        <div class="td-sc-title">The constraint is the moat</div>
+        <div class="td-sc-sub">How a research tool that refuses to know anything became the most defensible product in consumer AI.</div>
+        <div class="td-sc-stats">
+          <span class="td-sc-stat">Trust arch 9/10</span>
+          <span class="td-sc-stat">Growth loop 8/10</span>
+          <span class="td-sc-stat">Retention 5/10</span>
+        </div>
+        <div class="td-sc-footer">
+          <span class="td-sc-cta">Read teardown <span class="td-sc-arrow">›</span></span>
+          <span class="td-sc-lens">Adoption Loop · Architecture</span>
+        </div>
+      </div>
+
+      <div class="td-summary-card swift" id="ts-swift" onclick="showTeardown('swift')">
+        <div class="td-sc-badge" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);">
+          <svg width="7" height="7" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="white" opacity="0.3"/><circle cx="5" cy="5" r="2" fill="white"/></svg>
+          SwiftChat · Convegenius.ai
+        </div>
+        <div class="td-sc-title">Distribution without depth</div>
+        <div class="td-sc-sub">Designing the habit loop that converts episodic users into committed weekly learners on India's multilingual EdTech platform.</div>
+        <div class="td-sc-stats">
+          <span class="td-sc-stat">Target: 40% WAU habit</span>
+          <span class="td-sc-stat">NBA card</span>
+          <span class="td-sc-stat">Streak loop</span>
+        </div>
+        <div class="td-sc-footer">
+          <span class="td-sc-cta">Read teardown <span class="td-sc-arrow">›</span></span>
+          <span class="td-sc-lens">Retention · Habit Formation</span>
+        </div>
+      </div>
+
+      <div class="td-summary-card cred" id="ts-cred" onclick="showTeardown('cred')">
+        <div class="td-sc-badge" style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.2);">
+          <svg width="7" height="7" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="5" fill="white" opacity="0.3"/><circle cx="5" cy="5" r="2" fill="white"/></svg>
+          CRED · FinTech · FY25
+        </div>
+        <div class="td-sc-title">What they solved — and what's broken now</div>
+        <div class="td-sc-sub">CRED won the original game. The new problems are the side-effects of winning it — a 750+ growth ceiling and rented retention.</div>
+        <div class="td-sc-stats">
+          <span class="td-sc-stat">₹2,735 Cr revenue</span>
+          <span class="td-sc-stat">RICE 9.0 fix</span>
+          <span class="td-sc-stat">5 solutions</span>
+        </div>
+        <div class="td-sc-footer">
+          <span class="td-sc-cta">Read teardown <span class="td-sc-arrow">›</span></span>
+          <span class="td-sc-lens">JTBD · Metrics · RICE</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- ── END COMPACT GRID ── -->
+
+    <!-- ── PANELS ── -->
+    <div id="panel-nlm" class="td-panel active">
+    <div class="teardown-card reveal">
+
+      <!-- HEADER -->
+      <div class="teardown-header">
+        <div>
+          <div class="teardown-product-badge">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="flex-shrink:0"><circle cx="5" cy="5" r="5" fill="white" opacity="0.3"/><circle cx="5" cy="5" r="2" fill="white"/></svg>
+            NotebookLM · Google Labs
+          </div>
+          <h3 class="teardown-title">The constraint is the moat</h3>
+          <p class="teardown-subtitle">How a research tool that refuses to know anything became the most defensible product in consumer AI — and the constraint that now caps its ceiling.</p>
+        </div>
+        <div class="teardown-meta">
+          <span>By Eshan Tiwari</span>
+          <span>May 2026</span>
+          <span>Lens: Adoption Loop</span>
+          <span>& Model Architecture</span>
+        </div>
+      </div>
+
+      <!-- THESIS -->
+      <div class="teardown-thesis">
+        <div class="thesis-block">
+          <div class="thesis-label">Architecture → Trust</div>
+          <p class="thesis-text">Answers are drawn from <strong>your corpus with clickable citations</strong>, not from training weights. "No hallucination" is a structural property, not a prompt — and that's the one thing a frontier chatbot can't casually replicate.</p>
+        </div>
+        <div class="thesis-block">
+          <div class="thesis-label">Output → Distribution</div>
+          <p class="thesis-text">Audio Overviews turned grounded answers into a two-host podcast you could send to anyone. <strong>A B2B research utility inherited a B2C viral loop</strong> — most AI products grow by being useful in private; NotebookLM grows by producing artifacts people share.</p>
+        </div>
+      </div>
+
+      <!-- STRENGTHS / WEAKNESSES -->
+      <div class="teardown-body">
+        <div class="td-block">
+          <div class="td-block-label">
+            <span class="td-dot green"></span>
+            Strengths
+          </div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Source-grounding as a feature, not a disclaimer</div>
+              <div class="td-item-body">Clickable citations make trust the headline. Answers come from your PDFs, Docs, YouTube videos, and URLs — not from training weights users can't audit.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Audio Overviews were the breakout</div>
+              <div class="td-item-body">Sept 2024's two-host podcast went viral and powered Spotify Wrapped 2024 — distribution a Labs experiment could never buy.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Studio is an output factory</div>
+              <div class="td-item-body">One ingested corpus fans out to audio, video, slides, infographics, mind maps, and flashcards — multimodal leverage off a single grounding pass.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Distribution is free and everywhere</div>
+              <div class="td-item-body">A generous free tier riding Google One, Workspace, and the Gemini surface — acquisition cost rounds to zero.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label">
+            <span class="td-dot red"></span>
+            Weaknesses
+          </div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Viral surface ≠ daily-driver job</div>
+              <div class="td-item-body">Audio Overviews are marketing gold but often a one-time party trick. The durable job — quiet synthesis — isn't the thing that went viral.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">The notebook is a silo</div>
+              <div class="td-item-body">Context is trapped per-notebook with source caps; no default cross-notebook intelligence. Your "second brain" is fragmented into jars.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Grounding cuts both ways</div>
+              <div class="td-item-body">Ask anything outside your sources and it shrugs — so users bounce to Gemini or ChatGPT for the "what am I missing?" question, and don't always come back.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Built for creation, not maintenance</div>
+              <div class="td-item-body">Great at spinning up a notebook, weak at keeping a living knowledge base fresh as sources change over time.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label">
+            <span class="td-dot amber"></span>
+            Risks
+          </div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Identity erosion</div>
+              <div class="td-item-body">As Gemini absorbs "your documents" as native context, does NotebookLM become a feature of the assistant rather than a destination?</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">The grounding promise vs. the agentic future</div>
+              <div class="td-item-body">Deep Research pulls the open web in. The more agentic it gets, the less "only your sources" is literally true — and trust is the asset.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Monetization tension</div>
+              <div class="td-item-body">The generous free tier is both the growth engine and the value ceiling. Most users never hit a wall — where's willingness-to-pay without nerfing the loop?</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label">
+            <span class="td-dot blue"></span>
+            The growth loop
+          </div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">The functional job</div>
+              <div class="td-item-body">"Help me understand a pile of material I don't have time to read." Not "answer my question" — "give me an answer I can cite and act on, not a guess I have to re-verify."</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Three user arcs</div>
+              <div class="td-item-body">Students &amp; researchers (beachhead) → Professionals digesting deal rooms and specs → Curious consumers who arrived through Audio Overviews and never left.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">The output is the ad</div>
+              <div class="td-item-body">Every shared Audio Overview is a grounded demo of the product. A shareable artifact replaced a paid acquisition channel.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT I'D SHIP -->
+      <div class="teardown-ship">
+        <div class="td-block-label" style="margin-bottom:0.25rem;">
+          <span class="td-dot blue"></span>
+          What I'd ship next — four bets, ordered by leverage
+        </div>
+        <p style="font-size:0.82rem; color:var(--ink-3); margin-bottom:1.25rem; font-weight:300;">Turn the jars into a brain, and make the viral surface a real channel. The first bet is the whole game: resolve the silo without breaking the trust promise.</p>
+        <div class="ship-grid">
+          <div class="ship-item">
+            <div class="ship-num">01 · highest leverage</div>
+            <div class="ship-head">Cross-notebook knowledge graph</div>
+            <div class="ship-body">A personal layer that reasons across every notebook you own. Converts a tool into a system of record.</div>
+          </div>
+          <div class="ship-item">
+            <div class="ship-num">02</div>
+            <div class="ship-head">A "trust dial"</div>
+            <div class="ship-body">Let users blend grounded-only ↔ grounded + web, with provenance always labeled. Resolves the grounding-vs-flow tension instead of forcing a tool-switch.</div>
+          </div>
+          <div class="ship-item">
+            <div class="ship-num">03</div>
+            <div class="ship-head">Living notebooks</div>
+            <div class="ship-body">Scheduled re-ingestion, source-change alerts, "what's new in my corpus." Move from one-shot creation to ongoing maintenance — the real retention fix.</div>
+          </div>
+          <div class="ship-item">
+            <div class="ship-num">04</div>
+            <div class="ship-head">Audio as a loop, not a stunt</div>
+            <div class="ship-body">Public shareable notebooks + audio feeds with attribution back to the source notebook — the viral surface becomes a measurable acquisition channel.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEARDOWN METRICS -->
+      <div class="teardown-ship" style="border-top:1px solid var(--border); background:var(--bg-inset);">
+        <div class="td-block-label" style="margin-bottom:1rem;">
+          <span class="td-dot blue"></span>
+          PM scoring — how I'd rate NotebookLM across five dimensions
+        </div>
+        <div class="td-chart-grid">
+          <div class="chart-wrap">
+            <div class="chart-title">Product dimension scores (out of 10)</div>
+            <canvas id="nlmRadarChart" style="max-height:220px;"></canvas>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-title">Growth loop vs competitors</div>
+            <canvas id="nlmCompareChart" style="max-height:220px;"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="teardown-timeline">
+        <div class="timeline-label">From Labs experiment to growth engine</div>
+        <div class="timeline-track">
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Launches as<br>Project Tailwind</div>
+          </div>
+          <div class="timeline-node highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Audio Overviews<br>go viral</div>
+          </div>
+          <div class="timeline-node highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Powers Spotify<br>Wrapped 2024</div>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">NotebookLM Plus<br>via Google One</div>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Mobile apps<br>80+ languages</div>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Deep Research —<br>the agentic turn</div>
+          </div>
+          <div class="timeline-node highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">1M-token context<br>all plans · Gemini 3</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </div><!-- /teardown-card NLM -->
+    </div><!-- /panel-nlm -->
+
+    <div id="panel-swift" class="td-panel">
+    <!-- ══ SWIFTCHAT TEARDOWN ══ -->
+    <div class="teardown-card reveal">
+
+      <!-- HEADER -->
+      <div class="teardown-header">
+        <div>
+          <div class="teardown-product-badge" style="background:linear-gradient(135deg,#7c3aed,#4f46e5);">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="flex-shrink:0"><circle cx="5" cy="5" r="5" fill="white" opacity="0.3"/><circle cx="5" cy="5" r="2" fill="white"/></svg>
+            SwiftChat · Convegenius.ai · PM Assignment
+          </div>
+          <h3 class="teardown-title">Distribution without depth</h3>
+          <p class="teardown-subtitle">SwiftChat had scale — millions of users across India's multilingual EdTech market. What it didn't have was a habit loop. My assignment: design the mechanism that turns episodic activation into committed weekly use.</p>
+          <a href="https://swiftchat-lite.lovable.app/" target="_blank" rel="noopener" class="project-live-link" style="margin-top:1rem;">
+            <span class="project-live-link-dot"></span>
+            Live prototype — swiftchat-lite.lovable.app ↗
+          </a>
+        </div>
+        <div class="teardown-meta">
+          <span>By Eshan Tiwari</span>
+          <span>Feb 2026</span>
+          <span>Lens: Retention &amp;</span>
+          <span>Habit Formation</span>
+        </div>
+      </div>
+
+      <!-- ONBOARDING MOCKUP -->
+      <div class="preview-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><span class="b-dot red"></span><span class="b-dot amber"></span><span class="b-dot green"></span></div>
+          <div class="browser-url">swiftchat-lite.lovable.app · onboarding prototype</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);background:#111;min-height:240px;gap:1px;background-color:rgba(255,255,255,0.05);">
+          <!-- Step 1 -->
+          <div style="background:#161616;padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:0.25rem;">Step 1 of 3</div>
+            <div style="font-size:1rem;font-weight:700;color:rgba(255,255,255,0.9);line-height:1.2;">Welcome to SwiftChat</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:0.25rem;">Let's personalise your experience</div>
+            <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(99,102,241,0.5);border-radius:10px;padding:0.75rem;display:flex;align-items:center;gap:0.6rem;">
+              <span style="font-size:1.2rem;">🎓</span>
+              <div><div style="font-size:0.78rem;font-weight:600;color:#fff;">Student</div><div style="font-size:0.62rem;color:rgba(255,255,255,0.4);">Preparing for exams</div></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:0.75rem;display:flex;align-items:center;gap:0.6rem;">
+              <span style="font-size:1.2rem;">📚</span>
+              <div><div style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.7);">Teacher</div><div style="font-size:0.62rem;color:rgba(255,255,255,0.3);">Help students learn</div></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:0.75rem;display:flex;align-items:center;gap:0.6rem;">
+              <span style="font-size:1.2rem;">👨‍👩‍👧</span>
+              <div><div style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.7);">Parent</div><div style="font-size:0.62rem;color:rgba(255,255,255,0.3);">Track child's progress</div></div>
+            </div>
+          </div>
+          <!-- Step 2 -->
+          <div style="background:#111;padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:0.25rem;">Step 2 of 3</div>
+            <div style="font-size:1rem;font-weight:700;color:rgba(255,255,255,0.9);line-height:1.2;">Which language do you prefer?</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:0.25rem;">
+              <div style="background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.5);border-radius:8px;padding:0.5rem;text-align:center;font-size:0.75rem;font-weight:600;color:#a5b4fc;">Hindi</div>
+              <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.5rem;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.6);">English</div>
+              <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.5rem;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.6);">Telugu</div>
+              <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.5rem;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.6);">Tamil</div>
+              <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.5rem;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.6);">Bengali</div>
+              <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.5rem;text-align:center;font-size:0.75rem;color:rgba(255,255,255,0.6);">Marathi</div>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div style="background:#0e0e0e;padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:0.25rem;">Step 3 of 3</div>
+            <div style="font-size:1rem;font-weight:700;color:rgba(255,255,255,0.9);line-height:1.2;">3 bots picked for you</div>
+            <div style="font-size:0.7rem;color:rgba(255,255,255,0.35);">Based on your profile</div>
+            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.65rem 0.75rem;">
+              <div style="font-size:0.78rem;font-weight:600;color:#fff;">Maths Buddy</div>
+              <div style="display:flex;gap:0.5rem;margin-top:0.2rem;"><span style="font-size:0.62rem;background:rgba(99,102,241,0.2);color:#a5b4fc;padding:1px 6px;border-radius:3px;">Mathematics</span><span style="font-size:0.62rem;color:rgba(255,255,255,0.3);">53,000 learners</span></div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.65rem 0.75rem;">
+              <div style="font-size:0.78rem;font-weight:600;color:#fff;">English Tutor</div>
+              <div style="display:flex;gap:0.5rem;margin-top:0.2rem;"><span style="font-size:0.62rem;background:rgba(34,197,94,0.15);color:#4ade80;padding:1px 6px;border-radius:3px;">English</span><span style="font-size:0.62rem;color:rgba(255,255,255,0.3);">47,200 learners</span></div>
+            </div>
+            <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:8px;padding:0.6rem 0.75rem;text-align:center;font-size:0.75rem;font-weight:600;color:#4ade80;margin-top:0.25rem;">Start Learning → Get 50 XP</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THESIS -->
+      <div class="teardown-thesis">
+        <div class="thesis-block">
+          <div class="thesis-label">The root problem</div>
+          <p class="thesis-text">SwiftChat had distribution but not depth. Users activate, extract a moment of value, and leave — returning only when pushed, not by habit. The platform lacked a <strong>repeatable context-to-action loop</strong> that makes it feel personally relevant every week. Growth was compounding only in acquisition, never in retention.</p>
+        </div>
+        <div class="thesis-block">
+          <div class="thesis-label">The thesis</div>
+          <p class="thesis-text">A habit forms when users initiate sessions without an external push — tied to a recurring need. The fix isn't a feature, it's a <strong>loop</strong>: surface the right action at the right moment, reward completion, build streaks, and let social reciprocity do the rest. Target: <strong>40% of weekly actives</strong> report they'd be "very disappointed" without SwiftChat.</p>
+        </div>
+      </div>
+
+      <!-- BODY: ANALYSIS + FEATURES + METRICS -->
+      <div class="teardown-body">
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot red"></span>Root cause analysis</div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Undifferentiated new user experience</div>
+              <div class="td-item-body">Platform showed every new user the same generic experience — no signal on what to do next, no personalisation beyond language selection.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">No "next action" signal</div>
+              <div class="td-item-body">After completing a session, users faced a blank state. No contextual prompt to continue, no streak to protect, no digest to pull them back.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Episodic not habitual</div>
+              <div class="td-item-body">Engagement was event-driven (campaign, push notification) not need-driven. Without a trigger tied to a daily workflow, the app felt optional.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot green"></span>Features I proposed</div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Next Best Action (NBA) card</div>
+              <div class="td-item-body">A single contextual card at session end: one personalised prompt based on history, time-of-day, and which action types generate follow-through. Zero friction — one tap to continue.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Weekly digest — "Your Week on SwiftChat"</div>
+              <div class="td-item-body">Monday morning personalised summary: streak status, top bots, what's new. Delivered in-app + opt-in push. Dormant conversations light up via social reciprocity.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Connection streak + badge</div>
+              <div class="td-item-body">Visible streak counter on profile. "+1 week" animated badge on consecutive active weeks. Reward in consecutive — creates loss aversion that habit loops need.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot blue"></span>Success metrics</div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">North Star: 55% weekly depth</div>
+              <div class="td-item-body">55%+ of monthly actives engage ≥3 sessions in a week, with median session depth of 4+ actions. This is the proxy for a formed habit.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">D7 retention from onboarding cohort</div>
+              <div class="td-item-body">New users active on Day 7. Habit loop only works if the initial experience sets expectation of recurring value.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">25% NBA card tap rate</div>
+              <div class="td-item-body">DAU tapping the Next Best Action card — proxy for self-directed engagement and product self-awareness.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Week 8 habit completion</div>
+              <div class="td-item-body">% of users completing the full habit loop (3+ sessions/week for 4+ consecutive weeks) by Week 8 from onboarding.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot amber"></span>Product context</div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">India-first, multilingual</div>
+              <div class="td-item-body">6 languages at onboarding: Hindi, English, Telugu, Tamil, Bengali, Marathi. The UX is designed for users who don't default to English-first apps.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Bot-native platform</div>
+              <div class="td-item-body">Learning happens through bots (Maths Buddy: 53k, English Tutor: 47.2k, GK Quiz: 38.5k). The NBA card recommendation engine draws from this catalogue.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">XP gamification layer</div>
+              <div class="td-item-body">50 XP awarded at first bot selection. Streak and badge system builds on top of this to extend the reward mechanism beyond onboarding.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WHAT I SHIPPED AS PROTOTYPE -->
+      <div class="teardown-ship">
+        <div class="td-block-label" style="margin-bottom:0.25rem;">
+          <span class="td-dot blue"></span>
+          What I prototyped — the personalised onboarding flow
+        </div>
+        <p style="font-size:0.82rem;color:var(--ink-3);margin-bottom:1.25rem;font-weight:300;">Built a 3-step onboarding prototype that demonstrates the habit loop entry point: persona selection → language preference → personalised bot recommendations with XP incentive.</p>
+        <div class="ship-grid">
+          <div class="ship-item">
+            <div class="ship-num">01</div>
+            <div class="ship-head">Persona-first entry</div>
+            <div class="ship-body">Student / Teacher / Parent selection immediately signals what context-to-action loop to serve — one UX doesn't try to do all three.</div>
+          </div>
+          <div class="ship-item">
+            <div class="ship-num">02</div>
+            <div class="ship-head">Language as first-class signal</div>
+            <div class="ship-body">6 regional languages at step 2 — not an afterthought settings menu. This is the core UX insight for Bharat-first products.</div>
+          </div>
+          <div class="ship-item">
+            <div class="ship-num">03</div>
+            <div class="ship-head">Bot recommendations w/ social proof</div>
+            <div class="ship-body">3 personalised bots shown with learner counts (53k, 47k, 38k) — social proof that reduces the blank-state anxiety of a new platform.</div>
+          </div>
+          <div class="ship-item">
+            <div class="ship-num">04</div>
+            <div class="ship-head">XP hook at activation</div>
+            <div class="ship-body">"Start Learning → Get 50 XP" as the first CTA — immediately introduces the reward mechanism that the streak system will later make habitual.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ══ END SWIFTCHAT ══ -->
+    </div><!-- /teardown-card Swift -->
+    </div><!-- /panel-swift -->
+
+    <div id="panel-cred" class="td-panel">
+    <!-- ══ CRED TEARDOWN ══ -->
+    <div class="teardown-card reveal">
+
+      <!-- HEADER -->
+      <div class="teardown-header">
+        <div>
+          <div class="teardown-product-badge" style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="flex-shrink:0"><circle cx="5" cy="5" r="5" fill="white" opacity="0.3"/><circle cx="5" cy="5" r="2" fill="white"/></svg>
+            CRED · FinTech · PM Teardown · FY25
+          </div>
+          <h3 class="teardown-title">What they solved — and what's broken now</h3>
+          <p class="teardown-subtitle">CRED won the original game: bill pay for India's most creditworthy. The new problems are the side-effects of winning it — a growth ceiling, a rented retention engine, and 11+ product lines eroding the brand that made it.</p>
+        </div>
+        <div class="teardown-meta">
+          <span>By Eshan Tiwari</span>
+          <span>June 2026</span>
+          <span>Lens: JTBD · Metrics</span>
+          <span>Funnel · RICE</span>
+        </div>
+      </div>
+
+      <!-- CRED APP MOCKUP -->
+      <div class="preview-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><span class="b-dot red"></span><span class="b-dot amber"></span><span class="b-dot green"></span></div>
+          <div class="browser-url">CRED · India's premium credit-card rewards platform · FY25 metrics</div>
+        </div>
+        <div style="background:#0a0a0a;padding:1.5rem 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background-color:rgba(255,255,255,0.04);">
+          <div style="background:#0d0d0d;padding:1.25rem;text-align:center;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:-0.03em;line-height:1;">12.6M</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.35);margin-top:0.3rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;">members transacting</div>
+            <div style="font-size:0.65rem;color:#22c55e;margin-top:0.2rem;">▲ 14.5%</div>
+          </div>
+          <div style="background:#0d0d0d;padding:1.25rem;text-align:center;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:-0.03em;line-height:1;">14.4x</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.35);margin-top:0.3rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;">txns / user / month</div>
+            <div style="font-size:0.65rem;color:#22c55e;margin-top:0.2rem;">▲ 34%</div>
+          </div>
+          <div style="background:#0d0d0d;padding:1.25rem;text-align:center;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:-0.03em;line-height:1;">₹2,000</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.35);margin-top:0.3rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;">ARPU · 45% on 3+ products</div>
+            <div style="font-size:0.65rem;color:#22c55e;margin-top:0.2rem;">Highest in Indian payments</div>
+          </div>
+          <div style="background:#0d0d0d;padding:1.25rem;text-align:center;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.6rem;color:#fff;letter-spacing:-0.03em;line-height:1;">₹2,735Cr</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.35);margin-top:0.3rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.06em;">FY25 revenue</div>
+            <div style="font-size:0.65rem;color:#22c55e;margin-top:0.2rem;">▲ 16% YoY · near breakeven</div>
+          </div>
+        </div>
+        <!-- AARRR Funnel strip -->
+        <div style="background:#0a0a0a;padding:1rem 2rem;display:flex;gap:1px;border-top:1px solid rgba(255,255,255,0.04);">
+          <div style="flex:1;background:#111;padding:0.75rem;border-radius:6px;margin-right:4px;">
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.3);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem;">Acquisition</div>
+            <div style="font-size:0.72rem;color:#f59e0b;font-weight:500;">⚠ ₹1,271 CAC</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.3);margin-top:0.15rem;">700% IPL spike, then drop</div>
+          </div>
+          <div style="flex:1;background:#111;padding:0.75rem;border-radius:6px;margin-right:4px;">
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.3);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem;">Activation</div>
+            <div style="font-size:0.72rem;color:#ef4444;font-weight:500;">🕳 750+ gate wall</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.3);margin-top:0.15rem;">Rejected → dead-end waitlist</div>
+          </div>
+          <div style="flex:1;background:#111;padding:0.75rem;border-radius:6px;margin-right:4px;">
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.3);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem;">Retention</div>
+            <div style="font-size:0.72rem;color:#f59e0b;font-weight:500;">⚠ Novelty decay</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.3);margin-top:0.15rem;">Reward-led, not utility-led</div>
+          </div>
+          <div style="flex:1;background:#111;padding:0.75rem;border-radius:6px;margin-right:4px;">
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.3);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem;">Revenue</div>
+            <div style="font-size:0.72rem;color:#22c55e;font-weight:500;">✓ 45% cross-sell</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.3);margin-top:0.15rem;">₹2,000 ARPU — engine works</div>
+          </div>
+          <div style="flex:1;background:#111;padding:0.75rem;border-radius:6px;">
+            <div style="font-size:0.6rem;color:rgba(255,255,255,0.3);font-family:var(--mono);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem;">Referral</div>
+            <div style="font-size:0.72rem;color:#3b82f6;font-weight:500;">◎ Underused</div>
+            <div style="font-size:0.62rem;color:rgba(255,255,255,0.3);margin-top:0.15rem;">Gem/invite loop — on-brand</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- THESIS: ORIGIN + EVOLUTION -->
+      <div class="teardown-thesis">
+        <div class="thesis-block">
+          <div class="thesis-label">2018 origin — the JTBD</div>
+          <p class="thesis-text">Kunal Shah's insight: India's most creditworthy people were its least rewarded. The job-to-be-done: <strong>"Help me manage &amp; pay my credit cards effortlessly, and make me feel rewarded for being financially responsible."</strong> It attacked 4 pains — fragmented bill pay, zero reward for good behaviour, no premium fintech, and an untapped 30M+ cohort.</p>
+        </div>
+        <div class="thesis-block">
+          <div class="thesis-label">2026 — the new problem set</div>
+          <p class="thesis-text">CRED won the original game. The side-effects of winning: the <strong>750+ gate now caps the market</strong> it was designed to protect. Rejected users hit a dead-end. Retention leans on extrinsic rewards that decay. Animation ceremony slows the 10-second job people actually came for. And <strong>11+ product lines</strong> erode the brand trust that got users in the door.</p>
+        </div>
+      </div>
+
+      <!-- BODY: JTBD + PROBLEMS + SOLUTIONS + CHART -->
+      <div class="teardown-body">
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot green"></span>What CRED got right</div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Bill pay → elegant, instant flow</div>
+              <div class="td-item-body">Unified every card into one frictionless experience. Solved a real, recurring task for India's most underserved-by-UX segment.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Good behaviour → status + rewards</div>
+              <div class="td-item-body">Gems, coins, and an exclusive club gave on-time payers identity and recognition. Turned a chore into a badge.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Premium cohort → highest ARPU</div>
+              <div class="td-item-body">12.6M members, ₹2,000 ARPU — the highest in Indian payments. 45% using 3+ products. The cross-sell engine works.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot red"></span>What's broken now</div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Growth ceiling at 750+</div>
+              <div class="td-item-body">The gate that built the brand now caps the addressable market. Future members are deleted at the door — no path back into the funnel.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Retention is rented</div>
+              <div class="td-item-body">Engagement leans on extrinsic rewards that depreciate as novelty fades. No utility surface strong enough to hold users when rewards bore them.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">Identity sprawl</div>
+              <div class="td-item-body">11+ product lines (Travel, Garage, Money, Store, Mint…). "What is this app, actually?" erodes the premium trust that justifies the 750+ gate.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot amber"></span>North star metric tree</div>
+          <div class="td-item-list">
+            <div class="td-item">
+              <div class="td-item-head">Monthly transacting value per member</div>
+              <div class="td-item-body">CRED optimises for depth, not reach — highest ARPU in Indian payments is the scoreboard.</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">4 input metrics</div>
+              <div class="td-item-body">Activation (12.6M +14.5%) · Engagement (14.4 txns/mo +34%) · Monetisation (₹2,000 ARPU) · Scale (₹8.5L Cr payment value +23%)</div>
+            </div>
+            <div class="td-item">
+              <div class="td-item-head">FY25 financials</div>
+              <div class="td-item-body">Revenue ₹2,735 Cr ▲16% · Operating loss ↓51% to ₹298 Cr — near breakeven · Net loss ₹1,457 Cr (ESOP + depreciation heavy)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="td-block">
+          <div class="td-block-label"><span class="td-dot blue"></span>RICE prioritisation</div>
+          <div class="chart-wrap" style="border:none;padding:0;background:transparent;">
+            <div class="chart-title" style="margin-bottom:0.75rem;">Solution RICE scores (my prioritisation)</div>
+            <canvas id="credRiceChart" style="max-height:180px;"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 SOLUTIONS -->
+      <div class="teardown-ship">
+        <div class="td-block-label" style="margin-bottom:0.25rem;">
+          <span class="td-dot blue"></span>
+          5 bets — ordered by RICE score
+        </div>
+        <p style="font-size:0.82rem;color:var(--ink-3);margin-bottom:1.25rem;font-weight:300;">Ship the cheap, high-impact funnel fixes first. The strategic re-anchor is a slow burn.</p>
+        <div class="ship-grid" style="grid-template-columns:repeat(5,1fr);">
+          <div class="ship-item" style="border-top:3px solid #22c55e;">
+            <div class="ship-num">S2 · RICE 9.0 ↑</div>
+            <div class="ship-head">Fast-lane bill pay</div>
+            <div class="ship-body">Collapse animation after Nth payment. Moves offers to opt-in tab. Target: time-to-pay −40%, D30 retention +X%.</div>
+          </div>
+          <div class="ship-item" style="border-top:3px solid #3b82f6;">
+            <div class="ship-num">S1 · RICE 8.5</div>
+            <div class="ship-head">Pre-member track</div>
+            <div class="ship-body">Credit-building shell for sub-750 users. Score education + secured card/UPI hook. Target: waitlist activation 0%→15%.</div>
+          </div>
+          <div class="ship-item" style="border-top:3px solid #f59e0b;">
+            <div class="ship-num">S4 · RICE 7.0</div>
+            <div class="ship-head">GTM rebalance</div>
+            <div class="ship-body">Shift from IPL (₹1,271 CAC) to gem/referral loop + cross-sell into lending & wealth. Target: LTV:CAC &gt; 3:1.</div>
+          </div>
+          <div class="ship-item" style="border-top:3px solid #8b5cf6;">
+            <div class="ship-num">S3 · RICE 6.5</div>
+            <div class="ship-head">Utility-first retention</div>
+            <div class="ship-body">Make Money / Garage useful enough to open without a reward. Demote gems to reinforcement. Target: organic DAU share →50%+.</div>
+          </div>
+          <div class="ship-item" style="border-top:3px solid var(--border-strong);">
+            <div class="ship-num">S5 · RICE 5.5</div>
+            <div class="ship-head">Re-anchor identity</div>
+            <div class="ship-body">"Manages the financial life of people who manage money well." Prune products below usage floor. Target: brand-clarity NPS ↑.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROADMAP TIMELINE -->
+      <div class="teardown-timeline">
+        <div class="timeline-label">Sequenced roadmap — fix the funnel first, re-anchor later</div>
+        <div class="timeline-track">
+          <div class="timeline-node highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Now · 0–1Q<br>S2 Fast-lane</div>
+          </div>
+          <div class="timeline-node highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Now · 0–1Q<br>S1 Pre-member pilot</div>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Instrument<br>funnels &amp; time-to-pay</div>
+          </div>
+          <div class="timeline-node highlight">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Next · 1–3Q<br>S4 GTM rebalance</div>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Next · 1–3Q<br>S3 Utility retention A/B</div>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Later · 3Q+<br>S5 Re-anchor narrative</div>
+          </div>
+          <div class="timeline-node">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">Later · 3Q+<br>Scale pre-member track</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ══ END CRED ══ -->
+    </div><!-- /teardown-card CRED -->
+    </div><!-- /panel-cred -->
+
+  </div>
+</div>
+
+<!-- HOW I THINK -->
+<div class="section-full" id="approach">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">how I think</span>
+    </div>
+    <div class="think-grid">
+      <div class="think-card reveal">
+        <div class="think-icon" aria-hidden="true">🔍</div>
+        <div class="think-num">01</div>
+        <div class="think-head">Problem before solution</div>
+        <div class="think-body">I spend longer than most on diagnosis. If I can't explain why the current state is broken in specific, observable terms, I'm not ready to build anything.</div>
+      </div>
+      <div class="think-card reveal reveal-delay-1">
+        <div class="think-icon" aria-hidden="true">⚡</div>
+        <div class="think-num">02</div>
+        <div class="think-head">AI where it earns its place</div>
+        <div class="think-body">Not every problem needs a model. I use AI when it genuinely changes what's possible — not to make the product feel modern. What would the manual version look like, and why can't it scale?</div>
+      </div>
+      <div class="think-card reveal reveal-delay-2">
+        <div class="think-icon" aria-hidden="true">🔄</div>
+        <div class="think-num">03</div>
+        <div class="think-head">Ship, learn, close the loop</div>
+        <div class="think-body">The spec is a hypothesis. I bias toward getting something in front of real users early, watching what they actually do, and adjusting. Best decisions come from observed behavior, not stated preference.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section-full" id="contact">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">let's talk</span>
+    </div>
+    <div class="contact-card reveal">
+      <div>
+        <h2 class="contact-headline">Got a broken product?<br>Let's figure out what's wrong.</h2>
+        <p class="contact-sub">I'm open to PM roles, AI product collaborations, and interesting conversations about broken systems. Reach out directly — no form, no gatekeeping.</p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:eshan.tiwari16@gmail.com">
+          <span>eshan.tiwari16@gmail.com</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/teshan16/" target="_blank" rel="noopener">
+          <span>linkedin.com/in/teshan16</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a class="contact-link" href="https://github.com/eshan1610" target="_blank" rel="noopener">
+          <span>github.com/eshan1610</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Eshan Tiwari</span>
+  <span>built with intent, not a template</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function() {
+  const html = document.documentElement;
+
+  // ── THEME ──
+  const saved = localStorage.getItem('et-theme');
+  if (saved) html.setAttribute('data-theme', saved);
+
+  document.getElementById('theme-toggle').addEventListener('click', function() {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('et-theme', next);
+  });
+
+  // ── SCROLL PROGRESS ──
+  const bar = document.getElementById('progress-bar');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (scrollTop / docHeight * 100) + '%';
+  }
+
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('main-nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('[id]');
+
+  function updateNav() {
+    if (window.scrollY > 40) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+
+    // Active nav link
+    let current = '';
+    sections.forEach(function(s) {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  // ── REVEAL ON SCROLL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  reveals.forEach(function(el) { observer.observe(el); });
+
+  // Trigger hero reveals immediately
+  setTimeout(function() {
+    document.querySelectorAll('.hero .reveal').forEach(function(el) {
+      el.classList.add('visible');
+    });
+    // Animate floating cards with stagger
+    document.querySelectorAll('.float-card').forEach(function(card, i) {
+      setTimeout(function() { card.classList.add('visible'); }, 400 + i * 180);
+    });
+  }, 100);
+
+  window.addEventListener('scroll', function() {
+    updateProgress();
+    updateNav();
+  }, { passive: true });
+
+  // ── TEARDOWN SWITCHER ──
+  window.showTeardown = function(id) {
+    // Summary cards
+    document.querySelectorAll('.td-summary-card').forEach(function(c) {
+      c.classList.remove('active');
+    });
+    var activeCard = document.getElementById('ts-' + id);
+    if (activeCard) activeCard.classList.add('active');
+
+    // Panels
+    document.querySelectorAll('.td-panel').forEach(function(p) {
+      p.classList.remove('active');
+    });
+    var activePanel = document.getElementById('panel-' + id);
+    if (activePanel) {
+      activePanel.classList.add('active');
+      // Re-trigger reveal animations inside the panel
+      activePanel.querySelectorAll('.reveal:not(.visible)').forEach(function(el) {
+        setTimeout(function() { el.classList.add('visible'); }, 50);
+      });
+      // Re-draw charts that might be inside this panel
+      if (window._chartsBuilt) setTimeout(function() { window._rebuildCharts && window._rebuildCharts(); }, 60);
+      // Smooth scroll to panel
+      setTimeout(function() {
+        activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  };
+})();
+</script>
+
+<script>
+(function() {
+  var charts = {};
+
+  function isDark() {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
+  }
+
+  function colors() {
+    var d = isDark();
+    return {
+      ink:      d ? '#f5f4f0' : '#111110',
+      ink3:     d ? '#878580' : '#757570',
+      ink4:     d ? '#4a4844' : '#b5b3ae',
+      card:     d ? '#1e1e1c' : '#ffffff',
+      inset:    d ? '#252523' : '#f0ede8',
+      border:   d ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.08)',
+      green:    '#22c55e',
+      blue:     '#3b82f6',
+      amber:    '#f59e0b',
+      purple:   '#a855f7',
+      red:      '#ef4444',
+      greenFill: d ? 'rgba(34,197,94,0.15)' : 'rgba(34,197,94,0.1)',
+      blueFill:  d ? 'rgba(59,130,246,0.15)' : 'rgba(59,130,246,0.1)',
+    };
+  }
+
+  function baseOpts(c) {
+    return {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: c.card,
+          titleColor: c.ink,
+          bodyColor: c.ink3,
+          borderColor: c.border,
+          borderWidth: 1,
+          padding: 10,
+          cornerRadius: 8,
+          titleFont: { family: "'JetBrains Mono', monospace", size: 11 },
+          bodyFont:  { family: "'Plus Jakarta Sans', sans-serif", size: 12 },
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: c.border, drawBorder: false },
+          ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 10 } }
+        },
+        y: {
+          grid: { color: c.border, drawBorder: false },
+          ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 10 } }
+        }
+      }
+    };
+  }
+
+  function buildRecruitTime(c) {
+    var ctx = document.getElementById('recruitTimeChart');
+    if (!ctx) return;
+    if (charts.recruitTime) charts.recruitTime.destroy();
+    charts.recruitTime = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Manual process', 'With RECRUIT.ai'],
+        datasets: [{
+          data: [38, 1.5],
+          backgroundColor: [c.border, c.green],
+          borderColor:     ['transparent', c.green],
+          borderWidth: 0,
+          borderRadius: 6,
+          barThickness: 28,
+        }]
+      },
+      options: Object.assign({}, baseOpts(c), {
+        indexAxis: 'y',
+        plugins: Object.assign({}, baseOpts(c).plugins, {
+          tooltip: Object.assign({}, baseOpts(c).plugins.tooltip, {
+            callbacks: { label: function(ctx) { return ' ' + ctx.raw + ' hours'; } }
+          })
+        }),
+        scales: {
+          x: {
+            grid: { color: c.border },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 10 },
+              callback: function(v) { return v + 'h'; } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 10 } }
+          }
+        }
+      })
+    });
+  }
+
+  function buildRecruitFunnel(c) {
+    var ctx = document.getElementById('recruitFunnelChart');
+    if (!ctx) return;
+    if (charts.recruitFunnel) charts.recruitFunnel.destroy();
+    charts.recruitFunnel = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Applications', 'AI Screened', 'Shortlisted', 'Interviews'],
+        datasets: [{
+          data: [500, 500, 42, 15],
+          backgroundColor: [
+            'rgba(59,130,246,0.15)',
+            'rgba(59,130,246,0.3)',
+            'rgba(34,197,94,0.35)',
+            'rgba(34,197,94,0.7)',
+          ],
+          borderColor: [c.blue, c.blue, c.green, c.green],
+          borderWidth: 1,
+          borderRadius: 6,
+          barThickness: 22,
+        }]
+      },
+      options: Object.assign({}, baseOpts(c), {
+        indexAxis: 'y',
+        scales: {
+          x: {
+            grid: { color: c.border },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 10 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 10 } }
+          }
+        }
+      })
+    });
+  }
+
+  function buildArgusGrowth(c) {
+    var ctx = document.getElementById('argusGrowthChart');
+    if (!ctx) return;
+    if (charts.argusGrowth) charts.argusGrowth.destroy();
+    charts.argusGrowth = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12'],
+        datasets: [{
+          data: [12, 28, 45, 67, 98, 134, 178, 210, 265, 312, 380, 445],
+          borderColor: c.blue,
+          backgroundColor: c.blueFill,
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: c.blue,
+          tension: 0.4,
+          fill: true,
+        }]
+      },
+      options: Object.assign({}, baseOpts(c), {
+        plugins: Object.assign({}, baseOpts(c).plugins, {
+          tooltip: Object.assign({}, baseOpts(c).plugins.tooltip, {
+            callbacks: { label: function(ctx) { return ' ' + ctx.raw + ' queries'; } }
+          })
+        }),
+        scales: {
+          x: {
+            grid: { color: c.border },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 9 } }
+          },
+          y: {
+            grid: { color: c.border },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 10 },
+              callback: function(v) { return v; } }
+          }
+        }
+      })
+    });
+  }
+
+  function buildArgusCategory(c) {
+    var ctx = document.getElementById('argusCategoryChart');
+    if (!ctx) return;
+    if (charts.argusCategory) charts.argusCategory.destroy();
+    charts.argusCategory = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['HR Policies', 'Processes', 'Technical Docs', 'Benefits & Ops'],
+        datasets: [{
+          data: [34, 28, 22, 16],
+          backgroundColor: [c.blue, c.green, c.purple, c.amber],
+          borderColor: c.card,
+          borderWidth: 3,
+          hoverOffset: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '65%',
+        plugins: {
+          legend: {
+            display: true,
+            position: 'right',
+            labels: {
+              color: c.ink3,
+              font: { family: "'JetBrains Mono', monospace", size: 9 },
+              boxWidth: 10,
+              padding: 10,
+            }
+          },
+          tooltip: {
+            backgroundColor: c.card,
+            titleColor: c.ink,
+            bodyColor: c.ink3,
+            borderColor: c.border,
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+            callbacks: { label: function(ctx) { return ' ' + ctx.label + ': ' + ctx.raw + '%'; } }
+          }
+        }
+      }
+    });
+  }
+
+  function buildNlmRadar(c) {
+    var ctx = document.getElementById('nlmRadarChart');
+    if (!ctx) return;
+    if (charts.nlmRadar) charts.nlmRadar.destroy();
+    charts.nlmRadar = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['Trust Architecture', 'Growth Loop', 'Retention', 'Monetization', 'Defensibility'],
+        datasets: [
+          {
+            label: 'NotebookLM',
+            data: [9, 8, 5, 4, 8],
+            borderColor: c.blue,
+            backgroundColor: c.blueFill,
+            borderWidth: 2,
+            pointRadius: 4,
+            pointBackgroundColor: c.blue,
+          },
+          {
+            label: 'Avg. AI Tool',
+            data: [4, 5, 6, 6, 4],
+            borderColor: c.border,
+            backgroundColor: 'transparent',
+            borderWidth: 1.5,
+            borderDash: [4, 4],
+            pointRadius: 3,
+            pointBackgroundColor: c.ink4,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              color: c.ink3,
+              font: { family: "'JetBrains Mono', monospace", size: 9 },
+              boxWidth: 10,
+              padding: 12,
+            }
+          },
+          tooltip: {
+            backgroundColor: c.card,
+            titleColor: c.ink,
+            bodyColor: c.ink3,
+            borderColor: c.border,
+            borderWidth: 1,
+            padding: 10,
+            cornerRadius: 8,
+          }
+        },
+        scales: {
+          r: {
+            min: 0, max: 10,
+            ticks: {
+              stepSize: 2,
+              color: c.ink4,
+              backdropColor: 'transparent',
+              font: { family: "'JetBrains Mono', monospace", size: 8 }
+            },
+            grid: { color: c.border },
+            angleLines: { color: c.border },
+            pointLabels: { color: c.ink3, font: { family: "'Plus Jakarta Sans', sans-serif", size: 10 } }
+          }
+        }
+      }
+    });
+  }
+
+  function buildNlmCompare(c) {
+    var ctx = document.getElementById('nlmCompareChart');
+    if (!ctx) return;
+    if (charts.nlmCompare) charts.nlmCompare.destroy();
+    charts.nlmCompare = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Trust / Grounding', 'Viral distribution', 'Output variety', 'Cross-doc intel', 'Retention loop'],
+        datasets: [
+          {
+            label: 'NotebookLM',
+            data: [9, 8, 8, 3, 4],
+            backgroundColor: c.blue,
+            borderRadius: 4,
+            barThickness: 14,
+          },
+          {
+            label: 'ChatGPT / Gemini',
+            data: [4, 5, 7, 7, 7],
+            backgroundColor: c.border,
+            borderRadius: 4,
+            barThickness: 14,
+          }
+        ]
+      },
+      options: Object.assign({}, baseOpts(c), {
+        plugins: Object.assign({}, baseOpts(c).plugins, {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              color: c.ink3,
+              font: { family: "'JetBrains Mono', monospace", size: 9 },
+              boxWidth: 10,
+              padding: 12,
+            }
+          }
+        }),
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 9 } }
+          },
+          y: {
+            min: 0, max: 10,
+            grid: { color: c.border },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 9 },
+              callback: function(v) { return v + '/10'; } }
+          }
+        }
+      })
+    });
+  }
+
+  function buildCredRice(c) {
+    var ctx = document.getElementById('credRiceChart');
+    if (!ctx) return;
+    if (charts.credRice) charts.credRice.destroy();
+    charts.credRice = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['S2 Fast-lane', 'S1 Pre-member', 'S4 GTM shift', 'S3 Utility retention', 'S5 Re-anchor'],
+        datasets: [{
+          data: [9.0, 8.5, 7.0, 6.5, 5.5],
+          backgroundColor: [c.green, c.blue, c.amber, c.purple, c.border],
+          borderRadius: 5,
+          barThickness: 18,
+        }]
+      },
+      options: Object.assign({}, baseOpts(c), {
+        indexAxis: 'y',
+        plugins: Object.assign({}, baseOpts(c).plugins, {
+          tooltip: Object.assign({}, baseOpts(c).plugins.tooltip, {
+            callbacks: { label: function(ctx) { return ' RICE: ' + ctx.raw; } }
+          })
+        }),
+        scales: {
+          x: {
+            min: 0, max: 10,
+            grid: { color: c.border },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 9 },
+              callback: function(v) { return v; } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: c.ink4, font: { family: "'JetBrains Mono', monospace", size: 9 } }
+          }
+        }
+      })
+    });
+  }
+
+  function buildAll() {
+    var c = colors();
+    buildRecruitTime(c);
+    buildRecruitFunnel(c);
+    buildArgusGrowth(c);
+    buildArgusCategory(c);
+    buildNlmRadar(c);
+    buildNlmCompare(c);
+    buildCredRice(c);
+  }
+
+  // Build after Chart.js loads
+  if (typeof Chart !== 'undefined') {
+    buildAll();
+  } else {
+    window.addEventListener('load', buildAll);
+  }
+
+  window._chartsBuilt = true;
+  window._rebuildCharts = buildAll;
+
+  // Rebuild on theme toggle
+  document.getElementById('theme-toggle').addEventListener('click', function() {
+    setTimeout(buildAll, 50);
+  });
+})();
+</script>
+</body>
+</html>
